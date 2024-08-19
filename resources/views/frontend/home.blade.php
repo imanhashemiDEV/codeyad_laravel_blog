@@ -432,7 +432,7 @@
                 <div class="col-sm-6 col-md-6 col-lg-4 my-3">
                     <div class="blg-wrap bg-white pb-3">
                         <figure class="position-relative">
-                            <img src="img/blog/CSS-Contact-Us-Form.png" alt="" class="w-100">
+                            <img src="{{url('frontend/img/blog/CSS-Contact-Us-Form.png')}}" alt="" class="w-100">
                             <figcaption class="position-absolute w-100 h-100"><span class="blg-dt">4 مرداد</span></figcaption>
                         </figure class="position-relative">
                         <div class="px-3 py-1 text-start">
