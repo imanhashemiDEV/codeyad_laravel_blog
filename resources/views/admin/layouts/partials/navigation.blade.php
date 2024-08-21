@@ -14,9 +14,12 @@
                 </a>
             </li>
             <li data-toggle="tooltip" title="خروج">
-                <a href="login.html" class="go-to-page">
-                    <i class="icon ti-power-off"></i>
-                </a>
+                <form action="{{route('logout')}}" method="post">
+                    @csrf
+                    <button type="submit" class="btn btn-md text-white text-center w-100">
+                        <i class="icon ti-power-off w-100"></i>
+                    </button>
+                </form>
             </li>
         </ul>
     </div>
