@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -12,7 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin.users.index');
+        $users = User::query()->paginate(10);
+        return view('admin.users.index',compact('users'));
     }
 
     /**
@@ -28,7 +31,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['password']= Hash::make($request->password);
+        User::query()->create($data);
+
+        return redirect()->route('users.index')->with('success','کاربر با موفقیت ایجاد شد');
     }
 
     /**
@@ -44,7 +51,8 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::query()->findOrFail($id);
+        return view('admin.users.edit',compact('user'));
     }
 
     /**
@@ -52,7 +60,14 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::query()->findOrFail($id);
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password ? Hash::make($request->password) : $user->password,
+        ]);
+
+        return redirect()->route('users.index')->with('success','کاربر با موفقیت ویرایش شد');
     }
 
     /**
