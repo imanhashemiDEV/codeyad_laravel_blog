@@ -3,6 +3,7 @@
     <main class="main-content">
         <div class="card">
             <div class="card-body">
+                @include('admin.layouts.partials.errors')
                 <div class="container">
                     <h4 class="card-title">ویرایش کاربر</h4>
                     <form method="POST" action="{{route('users.update',$user->id)}}">
