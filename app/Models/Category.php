@@ -24,4 +24,30 @@ class Category extends Model
     {
         return $this->hasMany(Category::class, 'parent_id','id');
     }
+
+    public static function getCategories()
+    {
+        $array=[];
+       $categories = self::query()->with('childCategory')->where('parent_id',0)->get();
+       foreach ($categories as $category1) {
+           $array[$category1->id]= $category1->title;
+           foreach ($category1->childCategory as $category2) {
+               $array[$category2->id]= '-' . $category2->title;
+               foreach ($category2->childCategory as $category3) {
+                   $array[$category3->id]= '--' . $category3->title;
+               }
+           }
+       }
+          return $array;
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        self::deleting(function ($category){
+            foreach ($category->childCategory()->get() as $child){
+                $child->delete();
+            }
+        });
+    }
 }

@@ -36,3 +36,14 @@
         </div>
     </main>
 @endsection
+@push('scripts')
+    <script>
+        $('select').select2({
+            dir: "rtl",
+            dropdownAutoWidth: true,
+            $dropdownParent: $('#parent')
+        })
+
+
+    </script>
+@endpush

@@ -23,7 +23,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories = Category::query()->pluck('title','id');
+        $categories = Category::getCategories();
         return view('admin.categories.create', compact('categories'));
     }
 
@@ -54,7 +54,7 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        $categories = Category::query()->pluck('title','id');
+        $categories = Category::getCategories();
         $category = Category::query()->find($id);
         return view('admin.categories.edit', compact('categories','category'));
     }
@@ -80,7 +80,8 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         Category::destroy($id);
-        return redirect()->route('categories.index')
-            ->with('success','دسته بندی با موفقیت حذف شد');
+//        return redirect()->route('categories.index')
+//            ->with('success','دسته بندی با موفقیت حذف شد');
+        return response()->json(['success'=>'حذف انجام شد']);
     }
 }
