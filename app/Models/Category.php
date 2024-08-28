@@ -25,7 +25,7 @@ class Category extends Model
         return $this->hasMany(Category::class, 'parent_id','id');
     }
 
-    public static function getCategories()
+    public static function getCategories(): array
     {
         $array=[];
        $categories = self::query()->with('childCategory')->where('parent_id',0)->get();
@@ -41,7 +41,7 @@ class Category extends Model
           return $array;
     }
 
-    protected static function boot()
+    protected static function boot(): void
     {
         parent::boot();
         self::deleting(function ($category){
@@ -49,5 +49,10 @@ class Category extends Model
                 $child->delete();
             }
         });
+    }
+
+    public function articles(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Article::class);
     }
 }

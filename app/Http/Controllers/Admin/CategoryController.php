@@ -30,7 +30,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CategoryRequest $request)
+    public function store(CategoryRequest $request): \Illuminate\Http\RedirectResponse
     {
         Category::query()->create([
             'title' => $request->title,
@@ -44,7 +44,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): void
     {
         //
     }
@@ -62,7 +62,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CategoryRequest $request, string $id)
+    public function update(CategoryRequest $request, string $id): \Illuminate\Http\RedirectResponse
     {
         $category = Category::query()->find($id);
         $category::query()->update([
@@ -77,7 +77,7 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): \Illuminate\Http\JsonResponse
     {
         Category::destroy($id);
 //        return redirect()->route('categories.index')
