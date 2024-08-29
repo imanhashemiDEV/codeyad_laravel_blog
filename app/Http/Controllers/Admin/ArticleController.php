@@ -60,7 +60,9 @@ class ArticleController extends Controller
      */
     public function edit(string $id)
     {
-        return view('admin.articles.edit');
+        $categories = Category::getCategories();
+        $article = Article::query()->findOrFail($id);
+        return view('admin.articles.edit', compact('article', 'categories'));
     }
 
     /**
@@ -68,7 +70,24 @@ class ArticleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $article = Article::query()->findOrFail($id);
+
+        if(isset($request->image)){
+            $image_name = $request->image->hashName();
+            $request->image->storeAs('images/articles/', $image_name, 'public');
+        }
+
+
+        $article->update([
+            'category_id' => $request->category_id,
+            'title' => $request->title,
+            'body' => $request->body,
+            'image' => $request->image ? $image_name : $article->image,
+        ]);
+
+        return redirect()->route('articles.index')
+            ->with('success', 'مقاله با موفقیت ویرایش شد');
+
     }
 
     /**
@@ -76,6 +95,18 @@ class ArticleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Article::destroy($id);
+        return response()->json(['success' => 'مقاله حذف شد']);
+    }
+
+    public function ckeditorImage(Request $request)
+    {
+        if($request->hasFile('upload')) {
+            $image_name = $request->upload->hashName();
+            $request->upload->storeAs('images/articles/', $image_name, 'public');
+        }
+          $url = url('images/articles/' . $image_name);
+        return response()->json(['url'=>$url]);
+
     }
 }

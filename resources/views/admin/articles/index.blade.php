@@ -93,7 +93,6 @@
                             location.reload();
                         }
                     });
-
                 }
             });
         }

@@ -11,6 +11,7 @@ Route::get('/', PanelController::class)->name('panel');
 Route::resource('users', UserController::class);
 Route::resource('categories', CategoryController::class);
 Route::resource('articles', ArticleController::class);
+Route::post('/ckeditor_image',[ArticleController::class,'ckeditorImage'])->name('ckeditor.upload');
 Route::fallback(function () {
     return view('admin.errors.404');
 });

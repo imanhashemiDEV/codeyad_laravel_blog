@@ -24,6 +24,7 @@
 <script src="{{url('panel/vendors/select2/js/select2.min.js')}}"></script>
 <script src="{{url('panel/assets/js/app.js')}}"></script>
 <script src="{{url('panel/plugins/sweet_alert/sweetalert2.all.min.js')}}"></script>
+<script src="{{url('panel/plugins/ckeditor/ckeditor.js')}}"></script>
 @stack('scripts')
 </body>
 </html>
