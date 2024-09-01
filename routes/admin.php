@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', PanelController::class)->name('panel');
 Route::resource('users', UserController::class);
+Route::get('/create_user_role/{id}',[UserController::class,'createUserRoles'])->name('create.user.roles');
+Route::post('/store_user_role/{id}',[UserController::class,'storeUserRoles'])->name('store.user.roles');
 Route::resource('categories', CategoryController::class);
 Route::resource('articles', ArticleController::class);
 Route::resource('roles', RoleController::class);

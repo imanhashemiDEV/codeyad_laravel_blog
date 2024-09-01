@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -77,5 +78,19 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function createUserRoles($id)
+    {
+        $user = User::query()->findOrFail($id);
+        $roles = Role::query()->get();
+        return view('admin.users.user_roles', compact('roles','user'));
+    }
+
+    public function storeUserRoles(Request $request ,$id)
+    {
+        $user = User::query()->findOrFail($id);
+        $user->roles()->sync($request->roles);
+        return redirect()->back()->with(['success'=>'نقش ها به کاربر متصل شد']);
     }
 }
