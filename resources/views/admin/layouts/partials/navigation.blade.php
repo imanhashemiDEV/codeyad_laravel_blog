@@ -1,16 +1,21 @@
 <div class="navigation">
     <div class="navigation-icon-menu">
         <ul>
-            <li data-toggle="tooltip" title="کاربران">
-                <a href="#users" title=" کاربران">
-                    <i class="icon ti-user"></i>
-                </a>
-            </li>
-            <li data-toggle="tooltip" title="وبلاگ">
-                <a href="#blog" title=" وبلاگ">
-                    <i class="icon ti-book"></i>
-                </a>
-            </li>
+            @if(auth()->user()->hasRole('مدیر کل'))
+                <li data-toggle="tooltip" title="کاربران">
+                    <a href="#users" title=" کاربران">
+                        <i class="icon ti-user"></i>
+                    </a>
+                </li>
+            @endif
+
+            @if(auth()->user()->hasRole('مدیر کل') || auth()->user()->hasRole('مدیر مقالات'))
+                <li data-toggle="tooltip" title="وبلاگ">
+                    <a href="#blog" title=" وبلاگ">
+                        <i class="icon ti-book"></i>
+                    </a>
+                </li>
+            @endif
         </ul>
         <ul>
             <li data-toggle="tooltip" title="ویرایش پروفایل">
@@ -56,8 +61,10 @@
             <li>
                 <a href="#">مقاله ها</a>
                 <ul>
-                    <li><a href="{{route('articles.create')}}">ایجاد مقاله</a></li>
-                    <li><a href="{{route('articles.index')}}">لیست مقاله ها</a></li>
+                    @if(auth()->user()->hasRole('مدیر کل') || auth()->user()->hasRole('نویسنده'))
+                        <li><a href="{{route('articles.create')}}">ایجاد مقاله</a></li>
+                    @endif
+                        <li><a href="{{route('articles.index')}}">لیست مقاله ها</a></li>
                 </ul>
             </li>
         </ul>
