@@ -65,7 +65,7 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, string $id): \Illuminate\Http\RedirectResponse
     {
         $category = Category::query()->find($id);
-        $category::query()->update([
+        $category->update([
             'title' => $request->title,
             'parent_id' => $request->parent_id,
             'slug' => make_slug($request->title),
