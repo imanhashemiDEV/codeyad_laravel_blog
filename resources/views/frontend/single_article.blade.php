@@ -23,7 +23,7 @@
                             <div class="row">
                                 <div class="col-md-7">
                                     <figure>
-                                        <img src="img/blog/podcast.jpg" alt="" class="img-thumbnail d-table mx-auto">
+                                        <img src="{{url('images/articles/'. $article->image)}}" alt="{{$article->title}}" class="img-thumbnail d-table mx-auto">
                                     </figure>
                                 </div>
                                 <div class="col-md-5">
@@ -45,11 +45,7 @@
                             </div>
                         </div>
                         <div class="content-single rounded bg-white p-3 mt-3">
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>
-                            <img src="img/blog/buisiness.jpg" alt="">
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. </p>
-                            <p> کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>
+                            {!! $article->body !!}
                         </div>
                         <div class="rounded bg-white p-3 mt-3">
                             <div class="comments-box">
@@ -149,24 +145,19 @@
                             <div class="side-box-cats bg-white rounded p-3 mb-3">
                                 <span class="d-block my-3 border-right title position-relative"><i class="bi bi-archive"></i> دسته بندی</span>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><a href="#"> اینستاگرام</a><span class="counter">32</span></li>
-                                    <li class="list-group-item"><a href="#"> طراحی سایت</a><span class="counter">12</span></li>
-                                    <li class="list-group-item"><a href="#"> مجله روز</a><span class="counter">112</span></li>
-                                    <li class="list-group-item"><a href="#"> گزارش تصویری</a><span class="counter">12</span></li>
-                                    <li class="list-group-item"><a href="#"> سینما</a><span class="counter">2</span></li>
+                                    @foreach($subcategories as $category)
+                                        <li class="list-group-item"><a href="{{route('front.articles', $category->slug)}}"> {{$category->title}}</a><span class="counter">{{$category->articleCount($category->id)}}</span></li>
+                                    @endforeach
+
                                 </ul>
                             </div>
                             <div class="side-box-cats bg-white rounded p-3 mb-3">
                                 <span class="d-block my-3 border-right title position-relative"><i class="bi bi-chat-right-text"></i> مطالب اخیر</span>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><a href="#">چرا باید به فکر کاهش وزن بود ؟</a></li>
-                                    <li class="list-group-item"><a href="#">چگونه بدون سرمایه میلیاردر شدم</a></li>
-                                    <li class="list-group-item"><a href="#">خرید آیفون 10 یا نوت ؟</a></li>
-                                    <li class="list-group-item"><a href="#">برای سلامتی اولین قدم را بردار</a></li>
-                                    <li class="list-group-item"><a href="#">10 مقاله برتر در زمینه مراقبت پوست</a></li>
-                                    <li class="list-group-item"><a href="#">چگونه بدون سرمایه میلیاردر شدم</a></li>
-                                    <li class="list-group-item"><a href="#">خرید آیفون 10 یا نوت ؟</a></li>
-                                    <li class="list-group-item"><a href="#">برای سلامتی اولین قدم را بردار</a></li>
+                                    @foreach($last_articles as $last)
+                                        <li class="list-group-item"><a href="{{route('front.article',$last->id)}}">{{$last->title}}</a></li>
+                                    @endforeach
+
                                 </ul>
                             </div>
                         </div>

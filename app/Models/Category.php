@@ -55,4 +55,9 @@ class Category extends Model
     {
         return $this->hasMany(Article::class);
     }
+
+    public function articleCount($category_id): int
+    {
+      return  Article::query()->where('category_id',$category_id)->count();
+    }
 }

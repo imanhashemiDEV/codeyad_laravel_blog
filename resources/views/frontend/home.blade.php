@@ -102,7 +102,7 @@
                                         <i class="bi bi-play bg-white d-inline-block text-center"></i>
                                     </figcaption>
                                 </figure>
-                                <a href="#">
+                                <a href="{{route('front.article',$article->id)}}">
                                     <h6 class="overflow-hidden px-2">{{$article->title}}</h6>
                                 </a>
                             </div>
@@ -132,7 +132,7 @@
                                         class="blg-dt">{{\Hekmatinasser\Verta\Verta::instance($article->created_at)->formatJalaliDate()}}</span>
                                 </figcaption>
                             </figure>
-                            <a href="#">
+                            <a href="{{route('front.article',$article->id)}}">
                                 <h4 class="blg-title p-3 mx-5 text-dark border-bottom overflow-hidden">{{$article->title}}</h4>
                             </a>
                             <p class="p-4 overflow-hidden">زمانی که چندین سال قبل تصمیم گرفتیم تا قدم در میدان طراحی و

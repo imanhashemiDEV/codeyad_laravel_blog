@@ -18,8 +18,11 @@ class ArticleController extends Controller
         return view('frontend.articles', compact('articles'));
     }
 
-    public function article($id)
+    public function article(Article $article)
     {
-        return view('frontend.single_article');
+        $subcategories = Category::query()->where('parent_id','!=',0)->get();
+        $last_articles = Article::query()->orderBy('created_at', 'desc')->take(4)->get();
+        return view('frontend.single_article',
+            compact('article','subcategories','last_articles'));
     }
 }
