@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-2 col-3">
-                        <img src="img/logo.png" alt="" height="30px" style="object-fit: contain;margin-top:18px;filter: grayscale(1);">
+                        <img src="{{url('frontend/img/logo.png')}}" alt="" height="30px" style="object-fit: contain;margin-top:18px;filter: grayscale(1);">
                     </div>
                     <div class="col-md-7 col-5 pt-2">
                         <nav class="navbar navbar-expand-lg navbar-light">
@@ -27,7 +27,7 @@
                                             </a>
                                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                 @foreach($category->childCategory as $child)
-                                                    <li><a class="dropdown-item" href="#">{{$child->title}}</a></li>
+                                                    <li><a class="dropdown-item" href="{{route('front.articles', $child->slug)}}">{{$child->title}}</a></li>
                                                 @endforeach
                                             </ul>
                                         </li>
@@ -47,8 +47,15 @@
                     </div>
                     <div class="col-md-3 col-4 text-start">
                         <div class="top-account">
-                            <a href="#" class="text-dark"><i class="bi bi-person"></i></a>
-                            <a href="#" class="text-dark"><i class="bi bi-gem"></i></a>
+                            @guest
+                                <a href="{{route('login')}}" class="text-dark"><i class="bi bi-person"></i></a>
+                            @endguest
+                            @auth
+                                @if(auth()->user()->roles)
+                                        <a href="{{route('panel')}}" class="text-dark"><i class="bi bi-layout-text-window"></i></a>
+                                @endif
+
+                            @endauth
                         </div>
                     </div>
                 </div>
