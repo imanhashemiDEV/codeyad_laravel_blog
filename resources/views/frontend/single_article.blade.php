@@ -49,6 +49,7 @@
                         </div>
                         <div class="rounded bg-white p-3 mt-3">
                             <div class="comments-box">
+
                                 <div class="cm-parent rounded bg-light p-3 mb-3">
                                     <div class="row">
                                         <div class="col-1">
@@ -79,55 +80,24 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="cm-parent rounded bg-light p-3 mb-3">
-                                    <div class="row">
-                                        <div class="col-1">
-                                            <img src="img/userAvatar.png" alt="">
-                                        </div>
-                                        <div class="col-11">
-                                            <p><span class="d-inline-block text-primary ps-2">Farzad :</span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
-                                            <div class="text-start">
-                                       <span class="d-inline-block mt-2 py-1 text-info px-2">
-                                       <i class="bi bi-calendar2-event"></i> 23 مرداد
-                                       </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cm-chlid me-5 border border-dark-50 rounded p-3 mb-3">
-                                    <div class="row">
-                                        <div class="col-1">
-                                            <img src="img/userAvatar.png" alt="">
-                                        </div>
-                                        <div class="col-11">
-                                            <p><span class="d-inline-block text-primary ps-2">امید :</span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
-                                            <div class="text-start">
-                                       <span class="d-inline-block mt-2 py-1 text-info px-2">
-                                       <i class="bi bi-calendar2-event"></i> 23 مرداد
-                                       </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div>
                             <div class="comment-form-rules mb-3 mt-5">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <form class="comment-form">
-                                            <h6 class=" pb-3 border-bottom mb-3"><i class="bi bi-chat-right-text"></i> در بهبود مقاله شریک باشید</h6>
-                                            <div class="row">
-                                                <div class="col-12 mb-2">
-                                                    <input type="email"  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ایمیل شما (الزامی)">
+                                       @auth
+                                            <form class="comment-form" method="post" action="{{route('submit.user.comment')}}">
+                                                <h6 class=" pb-3 border-bottom mb-3"><i class="bi bi-chat-right-text"></i> در بهبود مقاله شریک باشید</h6>
+                                                <div class="col-12">
+                                                    <textarea name="content" class=" w-100" rows="5"></textarea></div>
+                                                <div class="text-start">
+                                                    <button type="submit">ارسال</button>
                                                 </div>
-                                                <div class="col-12 mb-2">
-                                                    <input type="text" id="exampleInput" placeholder="نام شما">
-                                                </div>
-                                            </div>
-                                            <div class="col-12"><textarea class=" w-100" rows="5"></textarea></div>
-                                            <div class="text-start">
-                                                <button type="submit">ارسال</button>
-                                            </div>
-                                        </form>
+                                            </form>
+                                       @endauth
+                                        @guest
+                                               <h6 class=" pb-3 border-bottom mb-3"><i class="bi bi-chat-right-text"></i>برای ثبت نظر باید در سایت ثبت نام کنید</h6>
+                                        @endguest
                                     </div>
                                     <div class="col-md-6">
                                         <div class="commemt-rules">
