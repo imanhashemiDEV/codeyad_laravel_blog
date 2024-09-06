@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Enums\CommentStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -22,7 +24,11 @@ class ArticleController extends Controller
     {
         $subcategories = Category::query()->where('parent_id','!=',0)->get();
         $last_articles = Article::query()->orderBy('created_at', 'desc')->take(4)->get();
+        $comments = Comment::query()
+            ->where('article_id',$article->id)
+            ->where('status',CommentStatus::Accepted->value)
+            ->get();
         return view('frontend.single_article',
-            compact('article','subcategories','last_articles'));
+            compact('article','subcategories','last_articles','comments'));
     }
 }

@@ -65,6 +65,7 @@
                         <li><a href="{{route('articles.create')}}">ایجاد مقاله</a></li>
                     @endif
                         <li><a href="{{route('articles.index')}}">لیست مقاله ها</a></li>
+                        <li><a href="{{route('users.comments')}}">نظرات</a></li>
                 </ul>
             </li>
         </ul>

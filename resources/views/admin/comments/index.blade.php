@@ -32,18 +32,22 @@
                                 <td class="text-center align-middle">{{$comment->article->title}}</td>
                                 <td class="text-center align-middle">{{$comment->user->name}}</td>
                                 <td class="text-center align-middle">{{$comment->status}}</td>
-                                @if($commnet->status === \App\Enums\CommentStatus::Draft->value)
-                                    <td class="text-center align-middle">
-                                        <a class="btn btn-outline-info" href="#">
+
+                                <td class="text-center align-middle">
+                                    @if($comment->status === \App\Enums\CommentStatus::Draft->value)
+                                        <a class="btn btn-outline-info" href="{{route('accept.comment',$comment->id)}}">
                                             تایید
                                         </a>
-                                    </td>
-                                    <td class="text-center align-middle">
-                                        <a class="btn btn-outline-info" href="#">
+                                    @endif
+                                </td>
+                                <td class="text-center align-middle">
+                                    @if($comment->status === \App\Enums\CommentStatus::Draft->value)
+                                        <a class="btn btn-outline-info" href="{{route('reject.comment',$comment->id)}}">
                                             رد
                                         </a>
-                                    </td>
-                                @endif
+                                    @endif
+                                </td>
+
                                 <td class="text-center align-middle">{{\Hekmatinasser\Verta\Verta::instance($comment->created_at)->format('%B %d، %Y')}}</td>
                             </tr>
                         @endforeach
@@ -67,7 +71,7 @@
             }
         });
 
-        function deleteArticle($id){
+        function deleteArticle($id) {
             Swal.fire({
                 title: "آیا از حذف مطمئن هستید",
                 icon: "warning",

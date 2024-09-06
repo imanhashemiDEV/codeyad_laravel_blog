@@ -49,45 +49,46 @@
                         </div>
                         <div class="rounded bg-white p-3 mt-3">
                             <div class="comments-box">
-
-                                <div class="cm-parent rounded bg-light p-3 mb-3">
-                                    <div class="row">
-                                        <div class="col-1">
-                                            <img src="img/userAvatar.png" alt="">
-                                        </div>
-                                        <div class="col-11">
-                                            <p><span class="d-inline-block text-primary ps-2">جواهری :</span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
-                                            <div class="text-start">
+                                 @foreach($comments as $comment)
+                                    <div class="cm-parent rounded bg-light p-3 mb-3">
+                                        <div class="row">
+                                            <div class="col-1">
+                                                <img src="img/userAvatar.png" alt="">
+                                            </div>
+                                            <div class="col-11">
+                                                <p><span class="d-inline-block text-primary ps-2">{{$comment->user->name}} :</span>{{$comment->content}}</p>
+                                                <div class="text-start">
                                        <span class="d-inline-block mt-2 py-1 text-info px-2">
-                                       <i class="bi bi-calendar2-event"></i> 23 مرداد
+                                       <i class="bi bi-calendar2-event"></i> {{\Hekmatinasser\Verta\Verta::instance($comment->created_at)->formatJalaliDate()}}
                                        </span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="cm-chlid me-5 border border-dark-50 rounded p-3 mb-3">
-                                    <div class="row">
-                                        <div class="col-1">
-                                            <img src="img/userAvatar.png" alt="">
-                                        </div>
-                                        <div class="col-11">
-                                            <p><span class="d-inline-block text-primary ps-2">مدیر سایت :</span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
-                                            <div class="text-start">
-                                       <span class="d-inline-block mt-2 py-1 text-info px-2">
-                                       <i class="bi bi-calendar2-event"></i> 23 مرداد
-                                       </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
+{{--                                    <div class="cm-chlid me-5 border border-dark-50 rounded p-3 mb-3">--}}
+{{--                                        <div class="row">--}}
+{{--                                            <div class="col-1">--}}
+{{--                                                <img src="img/userAvatar.png" alt="">--}}
+{{--                                            </div>--}}
+{{--                                            <div class="col-11">--}}
+{{--                                                <p><span class="d-inline-block text-primary ps-2">مدیر سایت :</span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>--}}
+{{--                                                <div class="text-start">--}}
+{{--                                       <span class="d-inline-block mt-2 py-1 text-info px-2">--}}
+{{--                                       <i class="bi bi-calendar2-event"></i> 23 مرداد--}}
+{{--                                       </span>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+                                 @endforeach
                             </div>
                             <div class="comment-form-rules mb-3 mt-5">
                                 <div class="row">
                                     <div class="col-md-6">
                                        @auth
-                                            <form class="comment-form" method="post" action="{{route('submit.user.comment')}}">
+                                            <form class="comment-form">
                                                 <h6 class=" pb-3 border-bottom mb-3"><i class="bi bi-chat-right-text"></i> در بهبود مقاله شریک باشید</h6>
+                                                <input type="hidden" name="article_id" value="{{$article->id}}">
                                                 <div class="col-12">
                                                     <textarea name="content" class=" w-100" rows="5"></textarea></div>
                                                 <div class="text-start">
@@ -137,3 +138,32 @@
         </div>
     </section>
 @endsection
+@push('scripts')
+    <script>
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $('form').on('submit', function (e){
+            e.preventDefault()
+            $.ajax({
+                url: "{{route('submit.user.comment')}}" ,
+                type: 'POST',
+                contentType: false,
+                processData: false,
+                data : new FormData(this),
+                success: function (data) {
+                    console.log(data.success)
+                    Swal.fire({
+                        title: "نظر شما ثبت شد!",
+                        text: data.success,
+                        icon: "success"
+                    });
+                }
+            });
+        })
+    </script>
+@endpush
