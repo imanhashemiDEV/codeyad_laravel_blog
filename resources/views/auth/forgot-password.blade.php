@@ -21,16 +21,22 @@
 			<img src="{{url('panel/assets/media/image/logo-sm.png')}}" alt="image">
 		</div>
 		<h5>بازنشانی رمز عبور</h5>
-		<form>
+		<form method="post" action="{{route('password.email')}}">
+            @csrf
 			<div class="form-group">
-				<input type="text" class="form-control text-left" placeholder="نام کاربری یا ایمیل" dir="ltr" required autofocus>
+				<input type="text" class="form-control text-left" placeholder="ایمیل" dir="ltr" name="email" required autofocus>
+                @if (session('status'))
+                    <div class="mb-4 font-medium text-sm text-green-600">
+                        {{ session('status') }}
+                    </div>
+                @endif
 			</div>
-			<button class="btn btn-primary btn-block">ثبت</button>
+			<button type="submit" class="btn btn-primary btn-block">ثبت</button>
 			<hr>
 			<p class="text-muted">یک عمل دیگر انجام دهید.</p>
-			<a href="./register.html" class="btn btn-sm btn-outline-light mr-1 my-1">هم اکنون ثبت نام کنید!</a>
+			<a href="{{route('register')}}" class="btn btn-sm btn-outline-light mr-1 my-1">هم اکنون ثبت نام کنید!</a>
 			یا
-			<a href="./login.html" class="btn btn-sm btn-outline-light ml-1 my-1">وارد شوید!</a>
+			<a href="{{route('login')}}" class="btn btn-sm btn-outline-light ml-1 my-1">وارد شوید!</a>
 		</form>
 	</div>
 	<script src="{{url('panel/vendors/bundle.js')}}"></script>
