@@ -20,7 +20,7 @@ class CommentController extends Controller
         return view('admin.comments.index', compact('comments'));
     }
 
-    public function submitUserComment(Request $request)
+    public function submitUserComment(Request $request): \Illuminate\Http\JsonResponse
     {
         $content = $request->get('content');
         Comment::query()->create([
