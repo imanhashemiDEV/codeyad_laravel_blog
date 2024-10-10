@@ -13,3 +13,5 @@ Route::fallback(function () {
 });
 
 
+Route::get('/eloquent', \App\Http\Controllers\EloquentController::class)->name('eloquent');
+
