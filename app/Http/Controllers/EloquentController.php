@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EloquentController extends Controller
 {
@@ -13,7 +14,8 @@ class EloquentController extends Controller
      */
     public function __invoke(Request $request)
     {
-        //$data = Article::query()->get('title');
+        //$data = Article::query()->get();
+       // $data = Article::query()->get('title');
        // $data = Article::query()->find(1);
        // $data = Article::query()->findOrFail(1);
        // $data = Article::query()->create([]);
@@ -41,14 +43,62 @@ class EloquentController extends Controller
 //                ['tilte','foo']
 //            ])->get();
 
-        $data = Article::query()->whereNull('image')->get();
-        $data = Article::query()->whereNotNull('image')->get();
-        $data = Article::query()->whereTitle('foo')->get();
-        $data = Article::query()->whereDate('created_at','2024/12/10')->get();
-        $data = Article::query()->whereBetween('created_at',['2024/12/10','2024/12/28'])->get();
-        $data = Article::query()->whereIn('id',[1,3,4,5])->first();
-        $data = Article::query()->whereNotIn('id',[1,3,4,5])->exists();
-          dd($data);
+ //       $data = Article::query()->whereNull('image')->get();
+//        $data = Article::query()->whereNotNull('image')->get();
+//        $data = Article::query()->whereTitle('foo')->get();
+//        $data = Article::query()->whereDate('created_at','2024/12/10')->get();
+//        $data = Article::query()->whereBetween('created_at',['2024/12/10','2024/12/28'])->get();
+//        $data = Article::query()->whereIn('id',[1,3,4,5])->first();
+//        $data = Article::query()->whereNotIn('id',[1,3,4,5])->exists();
+
+//        $data = Article::query()
+//            ->where(function ($query) use ($request) {
+//                $query->where('user_id', $request->user()->id)
+//                    ->where('title', $request->title);
+//            })
+//            ->orWhere('body', $request->body)
+//            ->get();
+
+//        $data = Article::query()
+//            ->whereColumn('updated_at','>', 'created_at')
+//            ->get();
+
+//        $data = Article::query()
+//            ->where('id','10')
+//            ->first()->title;
+//        $data = Article::query()
+//            ->where('id','10')
+//            ->value('title');
+//        $data = Article::query()
+//            ->where('id','10')
+//            ->exists(); // true - false
+//
+//        $data = Article::query()
+//            ->where('id','10')
+//            ->doesntExist(); // true - false
+
+//                $data = Article::query()
+//                 ->when($request->name,function($q) use ($request){
+//                     $q->where('name','like','%'.$request->name.'%');
+//                 })
+//                 ->get();
+
+//        $data = Article::query()->select('title')->get();
+//        $data = Article::query()->get('title');
+
+//          $data = Article::query()->select('user_id',DB::raw('count(*) as total'))->groupBy('user_id')->get();
+
+//        $data = Article::query()->selectRaw('user_id , count(*) as total')->groupBy('user_id')
+//            ->having('total', '>', 3)
+//            ->orderByDesc('total')
+//            ->get();
+
+//        $data = Article::query()
+//            ->orderByRaw('length (title) DESC ')
+//            ->get();
+
+//          return $data;
+//          dd($data);
         return view('eloquent');
     }
 }
