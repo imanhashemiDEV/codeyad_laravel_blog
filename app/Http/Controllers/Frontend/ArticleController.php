@@ -11,10 +11,11 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
-    public function articles($category_slug)
+    public function articles(Category $category)
     {
-        $category = Category::query()->where('slug', $category_slug)->firstOrFail();
-        $articles = Article::query()->where('category_id', $category->id)
+       // $category = Category::query()->where('slug', $category_slug)->firstOrFail();
+        $articles = Article::query()
+            ->where('category_id', $category->id)
             ->latest()
             ->paginate(6);
         return view('frontend.articles', compact('articles'));

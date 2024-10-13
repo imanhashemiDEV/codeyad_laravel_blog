@@ -60,4 +60,9 @@ class Category extends Model
     {
       return  Article::query()->where('category_id',$category_id)->count();
     }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
