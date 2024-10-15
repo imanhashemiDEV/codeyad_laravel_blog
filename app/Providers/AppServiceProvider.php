@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Category;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
@@ -33,5 +34,7 @@ class AppServiceProvider extends ServiceProvider
         ]);
 
         Paginator::useBootstrap();
+
+        Model::preventLazyLoading(! $this->app->isProduction());
     }
 }
