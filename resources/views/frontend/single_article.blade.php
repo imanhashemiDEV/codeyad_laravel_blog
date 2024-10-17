@@ -49,7 +49,7 @@
                         </div>
                         <div class="rounded bg-white p-3 mt-3">
                             <div class="comments-box">
-                                 @foreach($comments as $comment)
+                                 @foreach($article->comments as $comment)
                                     <div class="cm-parent rounded bg-light p-3 mb-3">
                                         <div class="row">
                                             <div class="col-1">
@@ -117,7 +117,7 @@
                                 <span class="d-block my-3 border-right title position-relative"><i class="bi bi-archive"></i> دسته بندی</span>
                                 <ul class="list-group list-group-flush">
                                     @foreach($subcategories as $category)
-                                        <li class="list-group-item"><a href="{{route('front.articles', $category->slug)}}"> {{$category->title}}</a><span class="counter">{{$category->articleCount($category->id)}}</span></li>
+                                        <li class="list-group-item"><a href="{{route('front.articles', $category->slug)}}"> {{$category->title}}</a><span class="counter">{{$category->articles_count}}</span></li>
                                     @endforeach
 
                                 </ul>

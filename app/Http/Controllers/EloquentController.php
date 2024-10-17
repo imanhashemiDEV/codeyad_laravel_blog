@@ -97,8 +97,43 @@ class EloquentController extends Controller
 //            ->orderByRaw('length (title) DESC ')
 //            ->get();
 
-//          return $data;
-//          dd($data);
+            $articles = Article::query()->get();
+//            foreach ($articles as $article) {
+//                echo $article->title . "<br>";
+//            }
+//
+//        Article::query()->each(function ($article) {
+//            echo $article->title . "<br>";
+//        },100);
+
+//           $modified = $articles->map(function ($article) {
+//                return [
+//                    'id' => $article->id,
+//                    'title' => $article->title,
+//                ];
+//                return $article;
+//            });
+
+//        $articles->transform(function ($article) {
+//            return [
+//                'id' => $article->id,
+//                'title' => $article->title,
+//                'length'=> strlen($article->title),
+//            ];
+//            return $article;
+//        });
+
+//     $filtered = $articles->filter(function ($article) {
+//                return $article->id > 7 ;
+//            });
+
+        $result = $articles->contains(function ($article) {
+            return $article->id == 37 ;
+        });
+
+
+        dd($result );
+
         return view('eloquent');
     }
 }
