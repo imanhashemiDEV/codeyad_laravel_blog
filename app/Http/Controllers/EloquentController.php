@@ -127,12 +127,12 @@ class EloquentController extends Controller
 //                return $article->id > 7 ;
 //            });
 
-        $result = $articles->contains(function ($article) {
-            return $article->id == 37 ;
-        });
+//        $result = $articles->contains(function ($article) {
+//            return $article->id === 37 ;
+//        });
 
 
-        dd($result );
+       // dd($result );
 
         return view('eloquent');
     }

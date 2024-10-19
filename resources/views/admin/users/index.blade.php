@@ -20,6 +20,7 @@
                             <th class="text-center align-middle text-primary">ایمیل</th>
                             <th class="text-center align-middle text-primary">نقش های کاربر</th>
                             <th class="text-center align-middle text-primary">ویرایش</th>
+                            <th class="text-center align-middle text-primary">آخرین مقاله</th>
                             <th class="text-center align-middle text-primary">تاریخ ایجاد</th>
                         </tr>
                         </thead>
@@ -44,6 +45,7 @@
                                         ویرایش
                                     </a>
                                 </td>
+                                <td class="text-center align-middle">{{$user->last_article ? \Hekmatinasser\Verta\Verta::instance($user->last_article)->format('%B %d، %Y') : ""}}</td>
                                 <td class="text-center align-middle">{{\Hekmatinasser\Verta\Verta::instance($user->created_at)->format('%B %d، %Y')}}</td>
                             </tr>
                         @endforeach

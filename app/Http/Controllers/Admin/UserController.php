@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
+use App\Models\Article;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,7 +17,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::query()->paginate(10);
+        $users = User::query()->with('articles')
+            ->addSelect([
+                'last_article'=> Article::query()->select('created_at')->whereColumn('user_id', 'users.id')->latest()->take(1),
+            ])
+            ->paginate(10);
         return view('admin.users.index',compact('users'));
     }
 
