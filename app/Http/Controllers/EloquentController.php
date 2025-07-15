@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -133,6 +134,36 @@ class EloquentController extends Controller
 
 
        // dd($result );
+
+//        $articles = Article::query()->cursor();
+//        foreach ($articles as $article) {
+//            $article->update([
+//
+//            ]);
+//        }
+
+//        Article::chunk(200, function (Collection $articles) {
+//
+//            foreach ($articles as $article) {
+//
+//                $article->update([
+//
+//            ]);
+//
+//            }
+//
+//        });
+
+
+//        $articles = Article::query()->lazy(200);
+//        foreach ($articles as $article) {
+//            $article->update([
+//
+//            ]);
+//        }
+
+        Article::query()->lazy(200)
+        ->each->update([]);
 
         return view('eloquent');
     }

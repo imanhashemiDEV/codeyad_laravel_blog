@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\EloquentController;
 use App\Http\Controllers\Frontend\ArticleController;
 use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -14,5 +15,5 @@ Route::fallback(static function () {
 });
 
 
-Route::get('/eloquent', \App\Http\Controllers\EloquentController::class)->name('eloquent');
+Route::get('/eloquent', EloquentController::class)->name('eloquent');
 

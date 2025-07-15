@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{url('frontend/css/owl.theme.default.css')}}">
     <link rel="stylesheet" href="{{url('frontend/css/style.css')}}">
     <link rel="stylesheet" href="{{url('panel/plugins/sweet_alert/sweetalert2.min.css')}}" type="text/css">
+    <link rel="manifest" href="{{asset('manifest.json')}}">
     <title>مقالات کدیاد</title>
 </head>
 <body>
