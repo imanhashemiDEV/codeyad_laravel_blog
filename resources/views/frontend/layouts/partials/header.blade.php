@@ -54,7 +54,6 @@
                                 @if(auth()->user()->roles)
                                         <a href="{{route('panel')}}" class="text-dark"><i class="bi bi-layout-text-window"></i></a>
                                 @endif
-
                             @endauth
                         </div>
                     </div>
